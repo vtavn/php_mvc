@@ -39,7 +39,12 @@ class App{
 
         if (file_exists('app/controllers/'.($this->__controller).'.php')){
            require_once 'controllers/'.($this->__controller).'.php';
-           $this->__controller = new $this->__controller();
+           //kiểm tra class $this->__controller tồn tại
+            if (class_exists($this->__controller)){
+                $this->__controller = new $this->__controller();
+            }else{
+                $this->loadError();
+            }
            unset($urlArr[0]);
         }else{
             $this->loadError();
@@ -53,7 +58,13 @@ class App{
 
         //xử lý params
         $this->__params = array_values($urlArr);
-        call_user_func_array([$this->__controller, $this->__action], $this->__params);
+
+        //kiểm tra action tồn tại
+        if (!method_exists([$this->__controller, $this->__action])){
+            call_user_func_array([$this->__controller, $this->__action], $this->__params);
+        }else{
+            $this->loadError();
+        }
     }
 
     public function loadError($name='404'){

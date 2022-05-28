@@ -1,7 +1,7 @@
 <?php
 class App{
 
-    private $__controller, $__action, $__params, $__routes;
+    private $__controller, $__action, $__params, $__routes, $__db;
 
     static public $app;
 
@@ -20,7 +20,12 @@ class App{
         $this->__action = 'index';
         $this->__params = [];
 
-        $url = $this->handleUrl();
+        if (class_exists('DB')){
+            $dbObj = new DB();
+            $this->__db = $dbObj->db;
+        }
+
+        $this->handleUrl();
 
     }
 
@@ -78,10 +83,13 @@ class App{
            //kiểm tra class $this->__controller tồn tại
             if (class_exists($this->__controller)){
                 $this->__controller = new $this->__controller();
+                unset($urlArr[0]);
+                if (!empty($this->__db)){
+                    $this->__controller->db = $this->__db;
+                }
             }else{
                 $this->loadError();
             }
-           unset($urlArr[0]);
         }else{
             $this->loadError();
         }

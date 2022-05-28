@@ -30,8 +30,13 @@ class Home extends Controller {
             '_name' => 'Quảng Nam',
             '_code' => 'QN'
         ];
-        $id = $this->province->insertProvince($dataInsert);
-        echo $id;
+//        $id = $this->province->insertProvince($dataInsert);
+//        echo $id;
+
+        $data = $this->db->table('province')->get();
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';
     }
 
 }

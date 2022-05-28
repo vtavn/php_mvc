@@ -4,8 +4,6 @@ abstract class Model extends Database
 {
     protected $db;
 
-    use QueryBuilder;
-
     function __construct()
     {
         $this->db = new Database();
@@ -15,7 +13,9 @@ abstract class Model extends Database
 
     abstract function fieldFill();
 
-    public function get() {
+    abstract function primaryKey();
+
+    public function all() {
         $tableName = $this->tableFill();
         $fieldSelect = $this->fieldFill();
         if (empty($fieldSelect)){
@@ -29,13 +29,14 @@ abstract class Model extends Database
         return false;
     }
 
-    public function first(){
+    public function find($id){
         $tableName = $this->tableFill();
         $fieldSelect = $this->fieldFill();
+        $primaryKey = $this->primaryKey();
         if (empty($fieldSelect)){
             $fieldSelect = '*';
         }
-        $sql = "SELECT $fieldSelect FROM $tableName";
+        $sql = "SELECT $fieldSelect FROM $tableName WHERE $primaryKey = $id";
         $query = $this->db->query($sql);
         if (!empty($query)){
             return $query->fetch(PDO::FETCH_ASSOC);

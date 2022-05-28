@@ -3,27 +3,26 @@ class Database
 {
     private $__conn;
 
+    use QueryBuilder;
+
     public function __construct()
     {
         global $db_config;
         $this->__conn = Connection::getInstance($db_config);
     }
 
-    function insert($table, $data){
-        global $con;
-
+    function insertData($table, $data){
         if (!empty($data)){
             $fieldStr = '';
             $valueStr = '';
             foreach ($data as $key => $value){
                 $fieldStr.=$key.',';
-                $valueStr.="'".$value.",";
+                $valueStr.="'".$value."',";
             }
             $fieldStr = rtrim($fieldStr, ',');
             $valueStr = rtrim($valueStr, ',');
 
             $sql = "INSERT INTO $table($fieldStr) VALUES ($valueStr)";
-
             $status = $this->query($sql);
 
             if ($status) {
@@ -33,7 +32,7 @@ class Database
         return false;
     }
 
-    function update($table, $data = '', $condition = ''){
+    function updateData($table, $data = '', $condition = ''){
         if (!empty($data)) {
             $updateStr = '';
             foreach ($data as $key => $value){
@@ -55,7 +54,7 @@ class Database
         return false;
     }
 
-    function delete($table, $condition = ''){
+    function deleteData($table, $condition = ''){
         if (!empty($condition)){
             $sql = 'DELETE FROM '.$table.' WHERE '.$condition;
         } else {
@@ -70,7 +69,6 @@ class Database
     }
 
     function query($sql){
-
         try {
             $statement = $this->__conn->prepare($sql);
 
@@ -86,6 +84,6 @@ class Database
     }
 
     function lastInsertId(){
-        return $this->__conn->lastInstertId();
+        return $this->__conn->lastInsertId();
     }
 }

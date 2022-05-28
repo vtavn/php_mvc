@@ -1,19 +1,24 @@
 <?php
 class Home extends Controller {
 
-    public $model;
+    public $province;
 
     public function __construct()
     {
-        $this->model = $this->model('HomeModel');
+        $this->province = $this->model('HomeModel');
     }
 
     public function index(){
-        $data = $this->model->getList();
-        print_r($data);
+//        $data = $this->province->getList();
 
-        $detail = $this->model->getDetail(0);
-        print_r($detail);
+        $data = $this->province->first();
+
+//        foreach ($data as $item) {
+//            echo $item['_name'].' - '.$item['_code'].'<br/>';
+//        }
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';
     }
 
 

@@ -2,15 +2,21 @@
 /*
  * Kế thừa class Model
  * */
-class HomeModel{
-    protected $_table = 'products';
+class HomeModel extends Model
+{
+    private $_table = 'province';
+
+    function tableFill(){
+        return 'province';
+    }
+
+    function fieldFill(){
+        return '_name,_code';
+    }
 
     public function getList(){
-        $data = [
-            'item 1',
-            'item 2',
-            'item 3'
-        ];
+//        $data = $this->db->query("SELECT * FROM $this->_table")->fetchAll(PDO::FETCH_ASSOC);
+
         return $data;
     }
 

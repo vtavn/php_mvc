@@ -8,3 +8,5 @@ $routes['default_controller'] = 'home';
 $routes['trang-chu'] = 'home';
 $routes['tin-tuc/.+-(\d+).html'] = 'news/category/$1';
 $routes['san-pham'] = 'product/index';
+
+?>

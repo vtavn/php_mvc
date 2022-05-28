@@ -11,19 +11,19 @@ class Product extends Controller {
     {
         $product = $this->model('ProductModel');
         $dataProduct = $product->getProductList();
-        $title = 'Danh sách sản phẩm';
-
-        $this->data['product_list'] = $dataProduct;
-        $this->data['title'] = $title;
+        $this->data['sub_content']['product_list'] = $dataProduct;
+        $this->data['page_title'] =  'Danh sách sản phẩm';
+        $this->data['content'] = 'products/list';
         //Render view
-        $this->render('products/list', $this->data);
+        $this->render('layouts/client_layout', $this->data);
     }
 
     public function detail($id=0)
     {
         $product = $this->model('ProductModel');
-
-        $this->data['info'] = $product->getDetail($id);
-        $this->render('products/detail', $this->data);
+        $this->data['sub_content']['info'] = $product->getDetail($id);
+        $this->data['page_title'] = 'Chi tiết sản phẩm';
+        $this->data['content'] = 'products/detail';
+        $this->render('layouts/client_layout', $this->data);
     }
 }

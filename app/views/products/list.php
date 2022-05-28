@@ -1,5 +1,2 @@
-<?php
-echo '<pre>';
-print_r($title);
-
-print_r($product_list);
+Danh sách sản phẩm
+<?php echo $page_title; ?>

@@ -3,9 +3,13 @@ class App{
 
     private $__controller, $__action, $__params, $__routes;
 
+    static public $app;
+
     public function __construct()
     {
-        global $routes;
+        global $routes, $config;
+
+        self::$app = $this;
 
         $this->__routes = new Route();
 
@@ -17,6 +21,7 @@ class App{
         $this->__params = [];
 
         $url = $this->handleUrl();
+
     }
 
     function getUrl(){
@@ -63,6 +68,11 @@ class App{
             $this->__controller = ucfirst($this->__controller);
         }
 
+        // Xử lý khi $urlCheck rỗng.
+        if (empty($urlCheck)){
+            $urlCheck = $this->__controller;
+        }
+
         if (file_exists('app/controllers/'.$urlCheck.'.php')){
            require_once 'controllers/'.$urlCheck.'.php';
            //kiểm tra class $this->__controller tồn tại
@@ -93,7 +103,8 @@ class App{
         }
     }
 
-    public function loadError($name='404'){
+    public function loadError($name='404', $data = []){
+        extract($data);
         require_once 'errors/'.$name.'.php';
     }
 }

@@ -39,4 +39,19 @@ class Home extends Controller {
         echo '</pre>';
     }
 
+    public function get_category(){
+        $request = new Request();
+        $data = $request->getFields();
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';
+        $this->render('categories/add');
+    }
+
+    public function post_category(){
+        $request = new Request();
+        $cateName = $request->getFields()['category_name'];
+        $response = new Response();
+        $response->redirect('https://google.com/');
+    }
 }

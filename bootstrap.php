@@ -31,9 +31,10 @@ if (!empty($configs_dir)){
         }
     }
 }
-
+require_once 'core/Session.php'; // load session class
 require_once 'core/Route.php'; // load route class
 require_once 'app/App.php'; //load app
+
 //kiểm tra config và load database
 if (!empty($config['database'])) {
     $db_config = array_filter($config['database']);
@@ -47,4 +48,4 @@ if (!empty($config['database'])) {
 require_once 'core/Model.php'; //load core model
 require_once 'core/Controller.php'; //Load base controller
 require_once 'core/Request.php'; // load request
-require_once 'core/Response.php';
+require_once 'core/Response.php'; //load response

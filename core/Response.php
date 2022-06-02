@@ -8,7 +8,8 @@ class Response
         }else{
             $url = _WEB_ROOT.'/'.$uri;
         }
-        header($url);
+        echo $url;
+        header('Location: '.$url);
         exit();
     }
 }

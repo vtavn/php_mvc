@@ -45,6 +45,17 @@ if (!empty($config['database'])) {
         require_once 'core/DB.php';
     }
 }
+//load core helper
+require_once 'core/Helper.php';
+
+$allHelper = scandir('app/helpers');
+if (!empty($allHelper)){
+    foreach ($allHelper as $item) {
+        if ($item != '.' && $item != '..' && file_exists('app/helpers/'.$item)){
+            require_once 'app/helpers/'.$item;
+        }
+    }
+}
 require_once 'core/Model.php'; //load core model
 require_once 'core/Controller.php'; //Load base controller
 require_once 'core/Request.php'; // load request

@@ -31,6 +31,17 @@ if (!empty($configs_dir)){
         }
     }
 }
+// load all services
+if (!empty($config['app']['service'])){
+    $allServices = $config['app']['service'];
+    if (!empty($allServices)){
+        foreach ($allServices as $serviceName) {
+            if (file_exists('app/core/'.$serviceName.'.php')){
+                require_once 'app/core/'.$serviceName.'.php';
+            }
+        }
+    }
+}
 require_once 'core/Session.php'; // load session class
 require_once 'core/Route.php'; // load route class
 require_once 'app/App.php'; //load app
@@ -56,6 +67,7 @@ if (!empty($allHelper)){
         }
     }
 }
+
 require_once 'core/Model.php'; //load core model
 require_once 'core/Controller.php'; //Load base controller
 require_once 'core/Request.php'; // load request

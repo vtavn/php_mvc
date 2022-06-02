@@ -25,11 +25,11 @@ class Home extends Controller {
 //
 //        $data3 = $this->province->find(3);
 //        print_r($data3);
-
-        $dataInsert = [
-            '_name' => 'Quảng Nam',
-            '_code' => 'QN'
-        ];
+//
+//        $dataInsert = [
+//            '_name' => 'Quảng Nam',
+//            '_code' => 'QN'
+//        ];
 //        $id = $this->province->insertProvince($dataInsert);
 //        echo $id;
 
@@ -46,12 +46,13 @@ class Home extends Controller {
 //        var_dump($check);
 //          $sessionData = Session::data();
 //          Session::delete();
-        Session::flash('msg', 'thêm dữ liệ thành công');
-        $msg = Session::flash('msg');
-        echo $msg;
+//        Session::flash('msg', 'thêm dữ liệ thành công');
+//        $msg = Session::flash('msg');
+//        echo $msg;
 //          echo '<pre>';
 //          print_r($sessionData);
 //          echo '</pre>';
+        echo toSlug('Thời sự');
     }
 
     public function get_user(){
@@ -60,9 +61,9 @@ class Home extends Controller {
 //        echo '<pre>';
 //        print_r($data);
 //        echo '</pre>';
-        $this->data['errors'] = Session::flash('errors');
+//        $this->data['errors'] = Session::flash('errors');
         $this->data['msg'] = Session::flash('msg');
-        $this->data['old'] = Session::flash('old');
+//        $this->data['old'] = Session::flash('old');
         $this->render('users/add', $this->data);
     }
 
@@ -99,12 +100,12 @@ class Home extends Controller {
 
             $validate = $request->validate();
             if (!$validate) {
-                Session::flash('errors', $request->errors());
+//                Session::flash('errors', $request->errors());
 //                $this->data['errors'] = $request->errors();
                 Session::flash('msg', 'Có lỗi xảy ra vui lòng thử lại');
 //                $this->data['msg'] = 'Có lỗi xảy ra vui lòng thử lại.';
 //                $this->data['old'] = $request->getFields();
-                Session::flash('old', $request->getFields());
+//                Session::flash('old', $request->getFields());
             }
 
 //            $this->render('users/add', $this->data);

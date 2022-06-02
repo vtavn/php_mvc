@@ -42,9 +42,11 @@ if (!empty($config['app']['service'])){
         }
     }
 }
-
+//load service provider
+require_once 'core/ServiceProvider.php';
+//load view class
+require_once 'core/View.php';
 require_once 'core/Load.php';
-
 //middleWare
 require_once 'core/Middlewares.php';
 require_once 'core/Session.php'; // load session class

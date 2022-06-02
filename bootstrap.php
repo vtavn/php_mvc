@@ -76,6 +76,7 @@ if (!empty($allHelper)){
 
 require_once 'app/App.php'; //load app
 require_once 'core/Model.php'; //load core model
+require_once 'core/Template.php'; //load template
 require_once 'core/Controller.php'; //Load base controller
 require_once 'core/Request.php'; // load request
 require_once 'core/Response.php'; //load response

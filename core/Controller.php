@@ -23,8 +23,19 @@ class Controller
         }
 
         extract($data);
-        if (file_exists(_DIR_ROOT.'/app/views/'.$view.'.php')){
-            require_once _DIR_ROOT.'/app/views/'.$view.'.php';
+
+        $contentView = null;
+        if (preg_match('~^layouts~', $view)){
+            if (file_exists(_DIR_ROOT.'/app/views/'.$view.'.php')){
+                require_once _DIR_ROOT.'/app/views/'.$view.'.php';
+            }
+        }else{
+            if (file_exists(_DIR_ROOT.'/app/views/'.$view.'.php')){
+                $contentView = file_get_contents(_DIR_ROOT.'/app/views/'.$view.'.php');
+            }
+            $template = new Template();
+            $template->run($contentView, $data);
         }
+
     }
 }
